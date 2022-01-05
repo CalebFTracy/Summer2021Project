@@ -13,7 +13,7 @@ public class YoutubeService {
 
         String baseUrl = "https://www.youtube.com/c/";
         YoutubeClient client = new YoutubeClient();
-        String rawHtml = client.getDetails(baseUrl + channelName);
+        //String rawHtml = client.getDetails(baseUrl + channelName);
         // TODO go through the html and get what you want
         YoutubeDetails details = new YoutubeDetails();
         // scraping youtube with raw-html
