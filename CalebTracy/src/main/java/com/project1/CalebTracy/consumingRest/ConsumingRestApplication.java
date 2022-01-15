@@ -11,6 +11,9 @@ public class ConsumingRestApplication {
 	RestTemplate template = new RestTemplate();
 
 	public YoutubeDetails getDetails(String youtubeUrl) throws Exception {
-		return template.getForObject(youtubeUrl, YoutubeDetails.class);
+		String response = template.getForObject(youtubeUrl, String.class);
+		YoutubeDetails details = new YoutubeDetails();
+		//pulling out details
+		return details;
 	}
 }
