@@ -19,7 +19,6 @@ public class YoutubeController {
 
     @GetMapping("/name/{channel}") //gradle imports from spring @'s are annotations
     public YoutubeDetails getName(@PathVariable String channel) {
-
         YoutubeDetails details = youtubeService.gatherInformation(channel);
         return details;
     }

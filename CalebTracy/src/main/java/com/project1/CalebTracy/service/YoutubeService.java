@@ -24,8 +24,32 @@ public class YoutubeService {
     public YoutubeDetails getDetails(String youtubeUrl) throws Exception {
         String response = template.getForObject(youtubeUrl, String.class);
         YoutubeDetails details = new YoutubeDetails();
-        //pulling out details
+        details.setSubscribers(getSubCount(response));
         return details;
+    }
+
+    private String getSubCount(String rawHTML) {
+        rawHTML.lastIndexOf("subscriberCountText");
+        String subscriberCount = "";
+        if(rawHTML.contains("subscriberCountText")) {
+            String toScrape = "subscriberCountText\":{\"accessibility\":{\"accessibilityData\":{\"label\":\"";
+            int index = rawHTML.lastIndexOf(toScrape) + toScrape.length();
+            while(true) {
+                char foundChar = rawHTML.charAt(index);
+                if(!Character.isDigit(foundChar) && foundChar != '.') {
+                    if(rawHTML.charAt(index + 1) == 'm') { //millions of subs
+                        subscriberCount += 'M';
+                    }
+                    else if(rawHTML.charAt(index) == 'K') { //thousands of subs
+                        subscriberCount += 'K';
+                    }
+                    break;
+                }
+                subscriberCount += foundChar;
+                index++;
+            }
+        }
+        return subscriberCount;
     }
 
 }
